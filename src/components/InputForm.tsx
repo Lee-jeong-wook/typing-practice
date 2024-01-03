@@ -25,7 +25,6 @@ export const InputForm = () => {
     };
 
     const onSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(text.length >= ex.length) return;
         if(e.key === "Enter"){
             let err:number = 0;
             ex.map((element, idx) => {
