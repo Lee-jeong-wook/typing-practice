@@ -27,12 +27,19 @@ export const InputForm = () => {
     const onSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(text.length !== ex.length) return;
         if(e.key === "Enter"){
-            calculHandler(seconds, text.length)
+            let err:number = 0;
+            text.map((element, idx) => {
+                if(element !== ex[idx]){
+                    err++;
+                }
+            })
+            calculHandler(seconds, text.length, err)
         }
     }
-    const calculHandler = (sec:number, length:number) => {
+    const calculHandler = (sec:number, length:number, err:number) => {
         const tmp = Math.floor(length / sec * 60);
-        alert(tmp);
+        const errPer = Math.floor(err / length * 100)
+        alert(`${tmp}타 오타율 ${err}%`);
     }
 
     useEffect(() => {
