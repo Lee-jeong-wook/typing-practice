@@ -25,21 +25,21 @@ export const InputForm = () => {
     };
 
     const onSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(text.length !== ex.length) return;
+        if(text.length >= ex.length) return;
         if(e.key === "Enter"){
             let err:number = 0;
-            text.map((element, idx) => {
-                if(element !== ex[idx]){
+            ex.map((element, idx) => {
+                if(element !== text[idx]){
                     err++;
                 }
             })
-            calculHandler(seconds, text.length, err)
+            calculHandler(seconds, ex.length, err)
         }
     }
     const calculHandler = (sec:number, length:number, err:number) => {
         const tmp = Math.floor(length / sec * 60);
         const errPer = Math.floor(err / length * 100)
-        alert(`${tmp}타 오타율 ${err}%`);
+        alert(`${tmp}타 오타 ${errPer}%`);
     }
 
     useEffect(() => {
