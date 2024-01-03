@@ -24,6 +24,17 @@ export const InputForm = () => {
         setText(value.split(""));
     };
 
+    const onSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(text.length !== ex.length) return;
+        if(e.key === "Enter"){
+            calculHandler(seconds, text.length)
+        }
+    }
+    const calculHandler = (sec:number, length:number) => {
+        const tmp = Math.floor(length / sec * 60);
+        alert(tmp);
+    }
+
     useEffect(() => {
         if (isTyping) {
             setSeconds(0);
@@ -51,7 +62,7 @@ export const InputForm = () => {
                 ))}
             </div>
             <span>{seconds}초</span>
-            <input type="text" onBlur={onBlur} onChange={onChange} onFocus={onFocus} />
+            <input type="text" onBlur={onBlur} onChange={onChange} onFocus={onFocus} onKeyDown={onSubmit} />
         </>
     );
 };
