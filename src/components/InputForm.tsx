@@ -44,6 +44,8 @@ export const InputForm = () => {
             return () => {
                 clearInterval(intervalId);
             };
+        } else{
+            setText([]);
         }
     }, [isTyping]);
 
@@ -62,7 +64,7 @@ export const InputForm = () => {
                 ))}
             </div>
             <span>{seconds}초</span>
-            <input type="text" onBlur={onBlur} onChange={onChange} onFocus={onFocus} onKeyDown={onSubmit} />
+            <input type="text" onBlur={onBlur} onChange={onChange} onFocus={onFocus} onKeyDown={onSubmit} value={text.join("")}/>
         </>
     );
 };
