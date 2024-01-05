@@ -5,11 +5,16 @@ export const InputForm = () => {
     const [isTyping, setIsTyping] = useState<boolean>(false);
     const [text, setText] = useState<string[]>([]);
     const [ex, setEx] = useState<string[]>([]);
-    const paraph = "The greate power follows greate responsibility.";
+    const paraph:string[] = ["The greate power follows greate responsibility.", 
+    "Life is from the inside out. When you shift on the inside, life shifts on the outside.", 
+    "Nothing in more despicable than respect based on fear.", 
+    "If you are not willing to risk the usual, you will have to settle for the ordinary."
+    ];
+    const[pIdx, setPIdx] = useState(0);
 
     useEffect(() => {
-        setEx(paraph.split(""));
-    }, []);
+        setEx(paraph[pIdx].split(""));
+    }, [pIdx]);
 
     const onBlur = () => {
         setIsTyping(false);
@@ -32,14 +37,26 @@ export const InputForm = () => {
                     err++;
                 }
             })
-            calculHandler(seconds, ex.length, err)
+            calculHandler(seconds, ex.length, err);
+            paragraphHandler();
         }
     }
+
     const calculHandler = (sec:number, length:number, err:number) => {
         const tmp = Math.floor(length / sec * 60);
         const errPer = Math.floor(err / length * 100)
         alert(`${tmp}타 오타 ${errPer}%`);
     }
+
+    const paragraphHandler = () => {
+        const length: number = paraph.length;
+        const rIdx = Math.floor(Math.random() * length);
+        console.log(ex);
+        console.log(paraph[rIdx]);
+        setPIdx(rIdx);
+        console.log(paraph[rIdx]);
+    }
+    
 
     useEffect(() => {
         if (isTyping) {
@@ -63,6 +80,7 @@ export const InputForm = () => {
                         key={idx}
                         style={{
                             color: text[idx] === element ? "green" : "red",
+                            fontSize:"35px"
                         }}
                     >
                         {element}
